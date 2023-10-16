@@ -1,0 +1,17 @@
+#!/bin/bash
+# Author : izun009
+
+# Define variable for docker image / Github container registry
+IMAGE_NAME=izzun/karsajobs:latest
+# REPO_URL=ghcr.io/izun009/karsajobs:latest
+
+# Build Docker image dari Dockerfile
+docker build -t $IMAGE_NAME .
+
+# Login ke Docker Hub / Github container registry
+docker login
+# echo $GHCR_PAT | docker login $REPO_URL -u izun009 --password-stdin
+
+# Push image
+docker push $IMAGE_NAME
+# docker push $REPO_URL
