@@ -1,0 +1,30 @@
+apiVersion: v1 # Versi API Kubernetes yang digunakan. 
+kind: PersistentVolume # Jenis objek Kubernetes yang akan dibuat.
+metadata:
+  name: mongo-pv # Nama Persistent Volume (PV).
+  labels:
+    app: mongodb # Label aplikasi.
+    tier: database # Label tier.
+spec:
+  storageClassName: manual # Nama kelas penyimpanan yang diklaim oleh PVC.
+  capacity:
+    storage: 5Gi # Kapasitas penyimpanan yang dialokasikan untuk PV (5 GiB).
+  accessModes:
+    - ReadWriteOnce # Mode akses PV (dapat dibaca dan ditulis oleh satu node).
+  hostPath:
+    path: /data/db # Path pada node host tempat PV akan disimpan.
+---
+apiVersion: v1 # Versi API Kubernetes yang digunakan. 
+kind: PersistentVolumeClaim # Jenis objek Kubernetes yang akan dibuat.
+metadata:
+  name: mongo-pv-claim # Nama Persistent Volume Claim (PVC).
+  labels:
+    app: mongodb # Label aplikasi.
+    tier: database # Label tier.
+spec:
+  storageClassName: manual # Nama kelas penyimpanan yang diklaim oleh PVC.
+  accessModes:
+    - ReadWriteOnce # Mode akses PVC (dapat dibaca dan ditulis oleh satu node).
+  resources:
+    requests:
+      storage: 5Gi # Kapasitas penyimpanan yang dialokasikan untuk PV (5 GiB).
