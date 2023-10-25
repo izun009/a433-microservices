@@ -1,0 +1,17 @@
+apiVersion: v1 # Versi API Kubernetes yang digunakan.
+kind: Service # Jenis objek Kubernetes yang akan dibuat.
+metadata:
+  name: shipping-service # Nama service
+  labels:
+    app: order # Label aplikasi
+    tier: frontend # Label tier
+spec:
+  selector:
+    app: order # Selector pod berdasarkan label app.
+    tier: frontend # Selector pod berdasarkan label tier.
+  type: NodePort # Jenis service
+  ports:
+    - protocol: TCP # Protokol yang digunakan
+      port: 3001 # Port yang digunakan
+      targetPort: 3001
+      nodePort: 30001 # Custom Port

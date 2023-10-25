@@ -1,0 +1,17 @@
+apiVersion: v1 # Versi API Kubernetes yang digunakan.
+kind: Service # Jenis objek Kubernetes yang akan dibuat.
+metadata:
+  name: order-service # Nama service
+  labels:
+    app: order # Label aplikasi
+    tier: backend # Label tier
+spec:
+  selector:
+    app: order # Selector pod berdasarkan label app.
+    tier: backend # Selector pod berdasarkan label tier.
+  type: NodePort # Jenis service
+  ports:
+    - protocol: TCP # Protocol yang digunakan
+      port: 3000 # Port yang digunakan oleh service
+      targetPort: 3000
+      nodePort: 30000 # Custom port

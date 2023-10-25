@@ -1,0 +1,25 @@
+apiVersion: apps/v1 # Versi API Kubernetes yang digunakan.
+kind: Deployment # Jenis objek Kubernetes yang akan dibuat.
+metadata:
+  name: rabbitmq # Nama Deployment
+  labels:
+    app: order # Label aplikasi
+    tier: backend # Label tier
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order # Selector pod berdasarkan label app.
+      tier: backend # Selector pod berdasarkan label tier
+  template:
+    metadata:
+      labels:
+        app: order # label aplikasi pada template pod
+        tier: backend # label tier pada template pod 
+    spec:
+      containers:
+        - name: rabbitmq # container name
+          image: rabbitmq:3.11-management # Image rabbitmq
+          ports:
+            - containerPort: 5672 # Port rabbitmq
+            - containerPort: 15672 # Port console

@@ -1,0 +1,29 @@
+apiVersion: apps/v1 # Versi API Kubernetes yang digunakan.
+kind: Deployment # Jenis objek Kubernetes yang akan dibuat.
+metadata:
+  name: shipping-deploy # Nama Deployment
+  labels:
+    app: order # Label aplikasi
+    tier: frontend # Label tier
+spec:
+  replicas: 1 # Jumlah replika
+  selector:
+    matchLabels:
+      app: order # Selector pod berdasarkan label app.
+      tier: frontend # Selector pod berdasarkan label tier.
+  template:
+    metadata:
+      labels:
+        app: order # label aplikasi pada template pod
+        tier: frontend # label tier pada template pod
+    spec:
+      containers:
+        - name: shipping-deploy # Container name
+          image: ghcr.io/izun009/shipping-service:latest # Image GHCR
+          ports:
+            - containerPort: 3001 # Container port
+          env:
+            - name: RABBITMQ_HOST # Env, service berjalan berdasarkan rabbitmq
+              value: rabbitmq
+      imagePullSecrets:
+        - name: ghcr-secret # Akses token Github Container Registry
