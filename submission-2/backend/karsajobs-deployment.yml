@@ -44,5 +44,5 @@ spec:
                 secretKeyRef:
                   name: mongo-secret # Nama Secret yang berisi credential MongoDB.
                   key: MONGO_ROOT_PASSWORD # Key untuk password MongoDB dalam Secret.
-      imagePullSecrets:
-        - name: ghcr-secret # Akses token Github Container Registry
+      # imagePullSecrets:
+      #   - name: ghcr-secret # Akses token Github Container Registry
